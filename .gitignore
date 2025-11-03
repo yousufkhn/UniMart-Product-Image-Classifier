@@ -1,0 +1,52 @@
+# Environment / secrets
+.env
+venv/
+.venv/
+ENV/
+env/
+*.env
+
+# Dataset and large artifacts
+dataset/
+model/
+saved_models/
+model_weights/
+*.pth
+*.pt
+
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDEs / editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Logs, reports, and runtime
+*.log
+*.sqlite3
+tmp/
+temp/
+*.out
+
+# Packaging / build
+build/
+dist/
+*.egg-info/
+
+# Testing / coverage
+.coverage
+coverage.*
+htmlcov/
+.pytest_cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
