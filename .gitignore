@@ -5,9 +5,11 @@ venv/
 ENV/
 env/
 *.env
+more.txt
 
 # Dataset and large artifacts
 dataset/
+data_split/
 model/
 saved_models/
 model_weights/
