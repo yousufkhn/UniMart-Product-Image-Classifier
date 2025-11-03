@@ -86,6 +86,74 @@ python dataset_downloader.py
 
 ---
 
+## Project commands (based on repo scripts)
+
+All runnable scripts live under the `scripts/` folder. They are implemented to work when run from the repository root. Example usages (PowerShell):
+
+- Split the raw dataset into train/val/test (creates `data_split/`):
+```powershell
+python scripts/split_dataset.py
+```
+
+- Preprocess images in-place (resize / remove corrupt files):
+```powershell
+python scripts/preprocess_images.py
+```
+
+- Download images from Unsplash (requires `UNSPLASH_ACCESS_KEY` in `.env`):
+```powershell
+python scripts/dataset_downloader.py
+```
+
+- Train the model (uses `src.get_data_loaders` and `src/model_builder`):
+```powershell
+python scripts/train_model.py --epochs 10 --batch_size 32 --lr 0.001 --num_workers 0
+```
+
+Notes:
+- `scripts/train_model.py` uses `get_data_loaders(data_dir="data_split")` (defined in `src/data_loader.py`) and constructs a ResNet-18 via `src/model_builder.build_model()`.
+- The script will create a `checkpoints/` directory and save the best model to `checkpoints/best_model.pth`.
+- `num_workers` defaults to `0` (safe for Windows). Increase when training on Linux with more CPU workers.
+
+---
+
+## Predict (single image)
+
+Use `scripts/predict.py` to run a single-image prediction. It expects two files produced by training:
+- `checkpoints/best_model.pth` — saved model weights
+- `checkpoints/best_model_classes.json` — mapping index→class
+
+Run (PowerShell):
+```powershell
+python scripts/predict.py
+```
+
+The script loads the model using `src.model_builder.build_model` and performs standard ImageNet-style preprocessing.
+
+---
+
+## Files and key functions (quick reference)
+
+- `src/data_loader.py` — get_data_loaders(data_dir="data_split", batch_size=32, num_workers=0)
+- `src/model_builder.py` — build_model(num_classes)
+- `src/model_utils.py` — save_checkpoint(...), accuracy(...)
+- `scripts/train_model.py` — training entrypoint (CLI args: --epochs, --batch_size, --lr, --num_workers, --data_dir)
+- `scripts/predict.py` — single-image prediction
+- `scripts/split_dataset.py` — prepare `data_split/` from `dataset/`
+- `scripts/dataset_downloader.py` — downloads images from Unsplash (requires API key)
+
+---
+
+## Troubleshooting notes
+
+- Module imports: scripts insert the repository root into `sys.path` so you can run scripts directly with `python scripts/<name>.py`. If you prefer not to rely on that, run modules with `-m` or set `PYTHONPATH`.
+- If you see `FileNotFoundError` for checkpoints or classes when running `predict.py`, confirm you have trained the model and the `checkpoints/` directory contains `best_model.pth` and `best_model_classes.json`.
+- On Windows prefer `--num_workers 0` to avoid DataLoader worker start issues.
+
+---
+
+---
+
 ## 🧑‍💻 Training (coming soon)
 
 Planned flow:
