@@ -14,7 +14,6 @@ data_split/
 model/
 saved_models/
 model_weights/
-*.pth
 *.pt
 
 # Python bytecode / caches
