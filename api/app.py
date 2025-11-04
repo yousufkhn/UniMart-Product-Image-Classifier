@@ -6,7 +6,7 @@ from PIL import Image
 import json
 import io
 import os
-from src.model_builder import build_model
+from api.src.model_builder import build_model
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="UniMart Image Classifier API")
@@ -20,8 +20,8 @@ app.add_middleware(
 )
 
 # --- Config ---
-MODEL_PATH = "checkpoints/best_model.pth"
-CLASS_PATH = "checkpoints/best_model_classes.json"
+MODEL_PATH = "api/checkpoints/best_model.pth"
+CLASS_PATH = "api/checkpoints/best_model_classes.json"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # --- Load model + classes once ---
