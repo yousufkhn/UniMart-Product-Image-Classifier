@@ -11,9 +11,9 @@ import argparse
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from src.data_loader import get_data_loaders
-from src.model_builder import build_model
-from src.model_utils import save_checkpoint, accuracy
+from api.src.data_loader import get_data_loaders
+from api.src.model_builder import build_model
+from api.src.model_utils import save_checkpoint, accuracy
 
 def parse_args():
     p = argparse.ArgumentParser()

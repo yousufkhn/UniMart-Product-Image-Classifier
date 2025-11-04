@@ -4,7 +4,7 @@ from torchvision import transforms
 from PIL import Image
 import json
 import os
-from src.model_builder import build_model
+from api.src.model_builder import build_model
 
 # --- config ---
 MODEL_PATH = "checkpoints/best_model.pth"
