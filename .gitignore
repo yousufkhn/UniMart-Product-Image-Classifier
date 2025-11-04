@@ -6,6 +6,7 @@ ENV/
 env/
 *.env
 more.txt
+random/
 
 # Dataset and large artifacts
 dataset/

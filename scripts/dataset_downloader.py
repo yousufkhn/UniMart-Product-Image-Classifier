@@ -21,7 +21,7 @@ categories = [
     "food items"
 ]
 
-def download_images(query, folder, count=100):
+def download_images(query, folder, count=200):
     os.makedirs(folder, exist_ok=True)
     url = f"https://api.unsplash.com/search/photos"
     headers = {"Accept-Version": "v1", "Authorization": f"Client-ID {ACCESS_KEY}"}
@@ -53,7 +53,7 @@ def main():
     for category in categories:
         safe_name = category.replace(" ", "_")
         folder = f"dataset/{safe_name}"
-        download_images(category, folder, count=80)  # 80 per category
+        download_images(category, folder, count=200)  # 200 per category
 
 if __name__ == "__main__":
     main()
