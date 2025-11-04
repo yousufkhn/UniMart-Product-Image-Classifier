@@ -8,6 +8,8 @@ import io
 import os
 from api.src.model_builder import build_model
 from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
+
 
 app = FastAPI(title="UniMart Image Classifier API")
 
@@ -20,8 +22,12 @@ app.add_middleware(
 )
 
 # --- Config ---
-MODEL_PATH = "api/checkpoints/best_model.pth"
-CLASS_PATH = "api/checkpoints/best_model_classes.json"
+# Base directory where this file (app.py) lives
+BASE_DIR = Path(__file__).resolve().parent
+
+# Build absolute paths to the model + classes files
+MODEL_PATH = BASE_DIR / "checkpoints" / "best_model.pth"
+CLASS_PATH = BASE_DIR / "checkpoints" / "best_model_classes.json"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # --- Load model + classes once ---
